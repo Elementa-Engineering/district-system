@@ -1,5 +1,5 @@
-from districtsystem.foo import foo
+from districtsystem.basemodel import BaseModel
 
 
 def test_foo():
-    assert foo() == "foo"
+    assert BaseModel
