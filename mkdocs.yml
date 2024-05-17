@@ -1,10 +1,10 @@
 site_name: districtsystem
-repo_url: https://github.com/samuelduchesne/districtsystem
-site_url: https://samuelduchesne.github.io/districtsystem
+repo_url: https://github.com/Elementa-Engineering/districtsystem
+site_url: https://Elementa-Engineering.github.io/districtsystem
 site_description: A district energy simulator
 site_author: Samuel Letellier-Duchesne
 edit_uri: edit/main/docs/
-repo_name: samuelduchesne/districtsystem
+repo_name: Elementa-Engineering/districtsystem
 copyright: Maintained by <a href="https://samuelduchesne.com">Florian</a>.
 
 nav:
@@ -43,7 +43,7 @@ theme:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/samuelduchesne/districtsystem
+      link: https://github.com/Elementa-Engineering/districtsystem
     - icon: fontawesome/brands/python
       link: https://pypi.org/project/districtsystem
 

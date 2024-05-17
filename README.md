@@ -1,15 +1,15 @@
 # districtsystem
 
-[![Release](https://img.shields.io/github/v/release/samuelduchesne/districtsystem)](https://img.shields.io/github/v/release/samuelduchesne/districtsystem)
-[![Build status](https://img.shields.io/github/actions/workflow/status/samuelduchesne/districtsystem/main.yml?branch=main)](https://github.com/samuelduchesne/districtsystem/actions/workflows/main.yml?query=branch%3Amain)
-[![codecov](https://codecov.io/gh/samuelduchesne/districtsystem/branch/main/graph/badge.svg)](https://codecov.io/gh/samuelduchesne/districtsystem)
-[![Commit activity](https://img.shields.io/github/commit-activity/m/samuelduchesne/districtsystem)](https://img.shields.io/github/commit-activity/m/samuelduchesne/districtsystem)
-[![License](https://img.shields.io/github/license/samuelduchesne/districtsystem)](https://img.shields.io/github/license/samuelduchesne/districtsystem)
+[![Release](https://img.shields.io/github/v/release/Elementa-Engineering/districtsystem)](https://img.shields.io/github/v/release/Elementa-Engineering/districtsystem)
+[![Build status](https://img.shields.io/github/actions/workflow/status/Elementa-Engineering/districtsystem/main.yml?branch=main)](https://github.com/Elementa-Engineering/districtsystem/actions/workflows/main.yml?query=branch%3Amain)
+[![codecov](https://codecov.io/gh/Elementa-Engineering/districtsystem/branch/main/graph/badge.svg)](https://codecov.io/gh/Elementa-Engineering/districtsystem)
+[![Commit activity](https://img.shields.io/github/commit-activity/m/Elementa-Engineering/districtsystem)](https://img.shields.io/github/commit-activity/m/Elementa-Engineering/districtsystem)
+[![License](https://img.shields.io/github/license/Elementa-Engineering/districtsystem)](https://img.shields.io/github/license/Elementa-Engineering/districtsystem)
 
 A district energy simulator
 
-- **Github repository**: <https://github.com/samuelduchesne/districtsystem/>
-- **Documentation** <https://samuelduchesne.github.io/districtsystem/>
+- **Github repository**: <https://github.com/Elementa-Engineering/districtsystem/>
+- **Documentation** <https://Elementa-Engineering.github.io/districtsystem/>
 
 ## Getting started with your project
 
