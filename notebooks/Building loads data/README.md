@@ -1,0 +1,1 @@
+Files should be downloaded and copied here from https://tylin1.sharepoint.com/:f:/r/teams/Team.2035.0012308.000/Shared%20Documents/General/03%20Working/01%20Decarb%20Strategy%20and%20Analysis/01%20Analysis/Carbon%20Signal/Models%20and%20Data?csf=1&web=1&e=O2Uy3m
