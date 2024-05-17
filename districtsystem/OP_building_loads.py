@@ -20,7 +20,7 @@ from districtsystem.inputs import dateTime, weather_df
 
 #### change years if needed ###########
 # current year of simulation - pick between 2045(decarb) or 2025(no decarb)
-year = 2045
+year = 2025
 # base year for billing calc.
 base_year = 2022
 
@@ -211,10 +211,14 @@ for caan_no in caan_list:
     simulationThermalLoads_output["Cooling Load (kbtu)"] = buildingLoads_perSqFt_df["cooling.load.kBtu_per_sqft"] * area
     simulationThermalLoads_output["Heating Load (kbtu)"] = buildingLoads_perSqFt_df["heating.load.kBtu_per_sqft"] * area
 
-    # heating anc cooling usage
-    simulationElecUse_output["Cooling (kWh)"] = (
-        simulationThermalLoads_output["Cooling Load (kbtu)"] / coolCOP
-    ) * 0.29307107017
+    if coolCOP >= 0:
+        # cooling usage
+        simulationElecUse_output["Cooling (kWh)"] = (
+            simulationThermalLoads_output["Cooling Load (kbtu)"] / coolCOP
+        ) * 0.29307107017
+    else:
+        simulationElecUse_output["Cooling (kWh)"] = [0] * 8760
+
     if heatCOP in range(1, 5):
         simulationElecUse_output["Heating (kWh)"] = (
             simulationThermalLoads_output["Heating Load (kbtu)"] / heatCOP
@@ -1435,36 +1439,40 @@ else:
 
     # elec boiler load to usage
     new_CUP_equip_elec_Use["New CUP Electric Boiler Electricity Use (kWh)"] = (
-        key_outputs_OG["Boiler-HHW Load (btu)"] / newCUp_reg_df["Electric Boiler - COP"]
-    )
+        key_outputs_OG["Boiler-HHW Load (btu)"] / 1000
+    ) / newCUp_reg_df["Electric Boiler - COP"]
 
     new_CUP_equip_elec_Use["New CUP Chiller Electricity Use (kWh)"] = (
-        key_outputs_OG["Chiller-GrS-CHW Load (btu)"] / newCUp_reg_df["Chiller COP"]
-        + key_outputs_OG["Chiller-OcS-CHW Load (btu)"] / newCUp_reg_df["Chiller COP"]
-        + key_outputs_OG["Chiller-TS-CHW Load (btu)"] / newCUp_reg_df["Chiller COP"]
+        (key_outputs_OG["Chiller-GrS-CHW Load (btu)"] / 1000) / newCUp_reg_df["Chiller COP"]
+        + (key_outputs_OG["Chiller-OcS-CHW Load (btu)"] / 1000) / newCUp_reg_df["Chiller COP"]
+        + (key_outputs_OG["Chiller-TS-CHW Load (btu)"] / 1000) / newCUp_reg_df["Chiller COP"]
     )
 
     new_CUP_equip_elec_Use["New CUP Heat Pump in Simultaneous Electricity Use (kWh)"] = (
-        key_outputs_OG["HP_HC-HHW Load (btu)"] / newCUp_reg_df["Heat Pump Simultaneous - COP"]
-    )
+        key_outputs_OG["HP_HC-HHW Load (btu)"] / 1000
+    ) / newCUp_reg_df["Heat Pump Simultaneous - COP"] + (key_outputs["HP_HC-CHW Load (btu)"] / 1000) / newCUp_reg_df[
+        "Heat Pump Simultaneous - COP"
+    ]
 
     new_CUP_equip_elec_Use["New CUP Heat Pump in Heating Only with Air-Source Electricity Use (kWh)"] = (
-        key_outputs_OG["HP_H-AirS-HHW Load (btu)"] / newCUp_reg_df["Heat Pump Heating Only Air-Source - COP"]
-    )
+        key_outputs_OG["HP_H-AirS-HHW Load (btu)"] / 1000
+    ) / newCUp_reg_df["Heat Pump Heating Only Air-Source - COP"]
 
     new_CUP_equip_elec_Use["New CUP Heat Pump in Heating Only with Water-Source Electricity Use (kWh)"] = (
-        key_outputs_OG["HP_H-GrS-HHW Load (btu)"] / newCUp_reg_df["Heat Pump Heating Only Water-Source - COP"]
-        + key_outputs_OG["HP_H-OcS-HHW Load (btu)"] / newCUp_reg_df["Heat Pump Heating Only Water-Source - COP"]
-    )
+        key_outputs_OG["HP_H-GrS-HHW Load (btu)"] / 1000
+    ) / newCUp_reg_df["Heat Pump Heating Only Water-Source - COP"] + (
+        key_outputs_OG["HP_H-OcS-HHW Load (btu)"] / 1000
+    ) / newCUp_reg_df["Heat Pump Heating Only Water-Source - COP"]
 
     new_CUP_equip_elec_Use["New CUP Heat Pump in Cooling Only with Air-Source Electricity Use (kWh)"] = (
-        key_outputs_OG["HP_C-AirS-CHW Load (btu)"] / newCUp_reg_df["Heat Pump Cooling Only Air-Source - COP"]
-    )
+        key_outputs_OG["HP_C-AirS-CHW Load (btu)"] / 1000
+    ) / newCUp_reg_df["Heat Pump Cooling Only Air-Source - COP"]
 
     new_CUP_equip_elec_Use["New CUP Heat Pump in Cooling Only with Water-Source Electricity Use (kWh)"] = (
-        key_outputs_OG["HP_C-GrS-CHW Load (btu)"] / newCUp_reg_df["Heat Pump Cooling Only Water-Source - COP"]
-        + key_outputs_OG["HP_C-OcS-CHW Load (btu)"] / newCUp_reg_df["Heat Pump Cooling Only Water-Source - COP"]
-        + key_outputs_OG["HP_C-TS-CHW Load (btu)"] / newCUp_reg_df["Heat Pump Cooling Only Water-Source - COP"]
+        (key_outputs_OG["HP_C-GrS-CHW Load (btu)"] / 1000) / newCUp_reg_df["Heat Pump Cooling Only Water-Source - COP"]
+        + (key_outputs_OG["HP_C-OcS-CHW Load (btu)"] / 1000)
+        / newCUp_reg_df["Heat Pump Cooling Only Water-Source - COP"]
+        + (key_outputs_OG["HP_C-TS-CHW Load (btu)"] / 1000) / newCUp_reg_df["Heat Pump Cooling Only Water-Source - COP"]
     )
 
 
