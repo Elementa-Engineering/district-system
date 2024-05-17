@@ -1,7 +1,45 @@
-# GitHub Codespaces ♥️ Jupyter Notebooks
+# districtsystem
 
-Welcome to your shiny new codespace! We've got everything fired up and running for you to explore Python and Jupyter notebooks.
+[![Release](https://img.shields.io/github/v/release/samuelduchesne/districtsystem)](https://img.shields.io/github/v/release/samuelduchesne/districtsystem)
+[![Build status](https://img.shields.io/github/actions/workflow/status/samuelduchesne/districtsystem/main.yml?branch=main)](https://github.com/samuelduchesne/districtsystem/actions/workflows/main.yml?query=branch%3Amain)
+[![codecov](https://codecov.io/gh/samuelduchesne/districtsystem/branch/main/graph/badge.svg)](https://codecov.io/gh/samuelduchesne/districtsystem)
+[![Commit activity](https://img.shields.io/github/commit-activity/m/samuelduchesne/districtsystem)](https://img.shields.io/github/commit-activity/m/samuelduchesne/districtsystem)
+[![License](https://img.shields.io/github/license/samuelduchesne/districtsystem)](https://img.shields.io/github/license/samuelduchesne/districtsystem)
 
-You've got a blank canvas to work on from a git perspective as well. There's a single initial commit with what you're seeing right now - where you go from here is up to you!
+A district energy simulator
 
-Everything you do here is contained within this one codespace. There is no repository on GitHub yet. If and when you’re ready you can click "Publish Branch" and we’ll create your repository and push up your project. If you were just exploring then and have no further need for this code then you can simply delete your codespace and it's gone forever.
+- **Github repository**: <https://github.com/samuelduchesne/districtsystem/>
+- **Documentation** <https://samuelduchesne.github.io/districtsystem/>
+
+## Getting started with your project
+
+First, create a repository on GitHub with the same name as this project, and then run the following commands:
+
+```bash
+git init -b main
+git add .
+git commit -m "init commit"
+git remote add origin git@github.com:samuelduchesne/districtsystem.git
+git push -u origin main
+```
+
+Finally, install the environment and the pre-commit hooks with
+
+```bash
+make install
+```
+
+You are now ready to start development on your project!
+The CI/CD pipeline will be triggered when you open a pull request, merge to main, or when you create a new release.
+
+To finalize the set-up for publishing to PyPi or Artifactory, see [here](https://fpgmaas.github.io/cookiecutter-poetry/features/publishing/#set-up-for-pypi).
+For activating the automatic documentation with MkDocs, see [here](https://fpgmaas.github.io/cookiecutter-poetry/features/mkdocs/#enabling-the-documentation-on-github).
+To enable the code coverage reports, see [here](https://fpgmaas.github.io/cookiecutter-poetry/features/codecov/).
+
+## Releasing a new version
+
+
+
+---
+
+Repository initiated with [fpgmaas/cookiecutter-poetry](https://github.com/fpgmaas/cookiecutter-poetry).
