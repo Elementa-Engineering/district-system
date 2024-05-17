@@ -3,6 +3,8 @@ import math
 import numpy as np
 import pandas as pd
 
+from districtsystem.config import INPUTSDIR
+
 # import all the sheets from the inputs excel file
 inputs_sheetDict = pd.read_excel("Inputs.xlsx", sheet_name=None)
 
@@ -246,18 +248,18 @@ CUP_inputs, building_inputs, TES_inputs = calculate_inputs(
 ###############Static inputs###############
 
 # import Weather data
-weather_df = pd.read_excel("Weather data.xlsx")
+weather_df = pd.read_excel(INPUTSDIR / "Weather data.xlsx")
 
 
 # import Ocean data
-ocean_df = pd.read_excel("Ocean temp.xlsx")
+ocean_df = pd.read_excel(INPUTSDIR / "Ocean temp.xlsx")
 
 
 # import heat pump data
-heatPump_df = pd.read_excel("CO2 heat pump details.xlsx")
+heatPump_df = pd.read_excel(INPUTSDIR / "CO2 heat pump details.xlsx")
 
 # import Date and Time
-dateTime_df = pd.read_excel("Date and Time.xlsx")
+dateTime_df = pd.read_excel(INPUTSDIR / "Date and Time.xlsx")
 
 buildingModule_inputs = pd.DataFrame()
 districtModule_inputs = pd.DataFrame()

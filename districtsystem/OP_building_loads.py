@@ -6,6 +6,8 @@ import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 
+from districtsystem.config import INPUTSDIR, OUTPUTDIR, PNNL
+
 # import nbimporter
 # # Import the notebook from a specific folder
 # import sys
@@ -27,16 +29,18 @@ base_year = 2022
 # if year > year of decarb then we will have key outputs from the New CUP module, else no key outputs
 if year == 2045:
     # this gets modified below
-    key_outputs = pd.read_pickle("outputs/key_outputs.pkl")  # noqa: S301
+    key_outputs = pd.read_pickle(OUTPUTDIR / "key_outputs.pkl")  # noqa: S301
     # this version remains the same
-    key_outputs_OG = pd.read_pickle("outputs/key_outputs.pkl")  # noqa: S301
+    key_outputs_OG = pd.read_pickle(OUTPUTDIR / "key_outputs.pkl")  # noqa: S301
 elif year == 2025:
-    key_outputs = pd.read_excel("New CUP_Key ouputs_No values (No decarb).xlsx")
-    key_outputs_OG = pd.read_excel("New CUP_Key ouputs_No values (No decarb).xlsx")
+    key_outputs = pd.read_excel(OUTPUTDIR / "New CUP_Key ouputs_No values (No decarb).xlsx")
+    key_outputs_OG = pd.read_excel(OUTPUTDIR / "New CUP_Key ouputs_No values (No decarb).xlsx")
 
 
 #########################  import Building COP and process load Data + clean up #######################################
-buildingLoadData_df = pd.read_excel("UCSB merged baselines_COP_process load.xlsx", sheet_name="Analytics - V1 5-14")
+buildingLoadData_df = pd.read_excel(
+    INPUTSDIR / "UCSB merged baselines_COP_process load.xlsx", sheet_name="Analytics - V1 5-14"
+)
 
 # Strip whitespace from all elements in the column
 buildingLoadData_df["Simulation_id"] = buildingLoadData_df["Simulation_id"].str.strip()
@@ -61,28 +65,36 @@ COP_df.set_index("Names", inplace=True)
 ##########################  upload PNNL profiles fo all utilites #######################################
 
 # PNNL electric profiles
-pnnl_hotWater_e_profiles_df = pd.read_excel("Building_PNNL_elec_profiles.xlsx", sheet_name="Hot Water Load (kbtu)")
-pnnl_cooking_e_profiles_df = pd.read_excel("Building_PNNL_elec_profiles.xlsx", sheet_name="Cooking Load (kbtu)")
-pnnl_laundry_e_profiles_df = pd.read_excel("Building_PNNL_elec_profiles.xlsx", sheet_name="Laundry Load (kbtu)")
-pnnl_other_e_profiles_df = pd.read_excel("Building_PNNL_elec_profiles.xlsx", sheet_name="Other Process Load (kbtu)")
+pnnl_hotWater_e_profiles_df = pd.read_excel(
+    PNNL / "Building_PNNL_elec_profiles.xlsx", sheet_name="Hot Water Load (kbtu)"
+)
+pnnl_cooking_e_profiles_df = pd.read_excel(PNNL / "Building_PNNL_elec_profiles.xlsx", sheet_name="Cooking Load (kbtu)")
+pnnl_laundry_e_profiles_df = pd.read_excel(PNNL / "Building_PNNL_elec_profiles.xlsx", sheet_name="Laundry Load (kbtu)")
+pnnl_other_e_profiles_df = pd.read_excel(
+    PNNL / "Building_PNNL_elec_profiles.xlsx", sheet_name="Other Process Load (kbtu)"
+)
 
 # PNNL gas profiles
-pnnl_hotWater_g_profiles_df = pd.read_excel("Building_PNNL_gas_profiles.xlsx", sheet_name="Hot Water Load (kbtu)")
-pnnl_cooking_g_profiles_df = pd.read_excel("Building_PNNL_gas_profiles.xlsx", sheet_name="Cooking Load (kbtu)")
-pnnl_laundry_g_profiles_df = pd.read_excel("Building_PNNL_gas_profiles.xlsx", sheet_name="Laundry Load (kbtu)")
-pnnl_other_g_profiles_df = pd.read_excel("Building_PNNL_gas_profiles.xlsx", sheet_name="Other Process Load (kbtu)")
+pnnl_hotWater_g_profiles_df = pd.read_excel(
+    PNNL / "Building_PNNL_gas_profiles.xlsx", sheet_name="Hot Water Load (kbtu)"
+)
+pnnl_cooking_g_profiles_df = pd.read_excel(PNNL / "Building_PNNL_gas_profiles.xlsx", sheet_name="Cooking Load (kbtu)")
+pnnl_laundry_g_profiles_df = pd.read_excel(PNNL / "Building_PNNL_gas_profiles.xlsx", sheet_name="Laundry Load (kbtu)")
+pnnl_other_g_profiles_df = pd.read_excel(
+    PNNL / "Building_PNNL_gas_profiles.xlsx", sheet_name="Other Process Load (kbtu)"
+)
 
 # PNNL district CHW profiles
-pnnl_hotWater_c_profiles_df = pd.read_excel("Building_PNNL_c_profiles.xlsx", sheet_name="Hot Water Load (kbtu)")
-pnnl_cooking_c_profiles_df = pd.read_excel("Building_PNNL_c_profiles.xlsx", sheet_name="Cooking Load (kbtu)")
-pnnl_laundry_c_profiles_df = pd.read_excel("Building_PNNL_c_profiles.xlsx", sheet_name="Laundry Load (kbtu)")
-pnnl_other_c_profiles_df = pd.read_excel("Building_PNNL_c_profiles.xlsx", sheet_name="Other Process Load (kbtu)")
+pnnl_hotWater_c_profiles_df = pd.read_excel(PNNL / "Building_PNNL_c_profiles.xlsx", sheet_name="Hot Water Load (kbtu)")
+pnnl_cooking_c_profiles_df = pd.read_excel(PNNL / "Building_PNNL_c_profiles.xlsx", sheet_name="Cooking Load (kbtu)")
+pnnl_laundry_c_profiles_df = pd.read_excel(PNNL / "Building_PNNL_c_profiles.xlsx", sheet_name="Laundry Load (kbtu)")
+pnnl_other_c_profiles_df = pd.read_excel(PNNL / "Building_PNNL_c_profiles.xlsx", sheet_name="Other Process Load (kbtu)")
 
 # PNNL district HW/steam profiles
-pnnl_hotWater_s_profiles_df = pd.read_excel("Building_PNNL_s_profiles.xlsx", sheet_name="Hot Water Load (kbtu)")
-pnnl_cooking_s_profiles_df = pd.read_excel("Building_PNNL_s_profiles.xlsx", sheet_name="Cooking Load (kbtu)")
-pnnl_laundry_s_profiles_df = pd.read_excel("Building_PNNL_s_profiles.xlsx", sheet_name="Laundry Load (kbtu)")
-pnnl_other_s_profiles_df = pd.read_excel("Building_PNNL_s_profiles.xlsx", sheet_name="Other Process Load (kbtu)")
+pnnl_hotWater_s_profiles_df = pd.read_excel(PNNL / "Building_PNNL_s_profiles.xlsx", sheet_name="Hot Water Load (kbtu)")
+pnnl_cooking_s_profiles_df = pd.read_excel(PNNL / "Building_PNNL_s_profiles.xlsx", sheet_name="Cooking Load (kbtu)")
+pnnl_laundry_s_profiles_df = pd.read_excel(PNNL / "Building_PNNL_s_profiles.xlsx", sheet_name="Laundry Load (kbtu)")
+pnnl_other_s_profiles_df = pd.read_excel(PNNL / "Building_PNNL_s_profiles.xlsx", sheet_name="Other Process Load (kbtu)")
 
 
 ######################################### calculate loads #######################################################
@@ -315,7 +327,7 @@ for caan_no in caan_list:
 
 
 ############# Current District Therm Op loads #############
-building_meta_df = pd.read_excel("Building_MetaData_.xlsx", header=1)
+building_meta_df = pd.read_excel(INPUTSDIR / "Building_MetaData.xlsx", header=1)
 current_district_therm_loads = pd.DataFrame()
 
 
@@ -742,7 +754,7 @@ new_Bldg_Therm_Op_Loads = filtered_bldg_differentBldgs(
 ######################## wet bulb / COP regression #######################
 
 calculation_map_COP_wetbulb = pd.read_excel(
-    "UCSB Calculation Map.xlsx", sheet_name="Reg. Data - Current District", header=1
+    INPUTSDIR / "UCSB Calculation Map.xlsx", sheet_name="Reg. Data - Current District", header=1
 )
 
 
@@ -849,7 +861,7 @@ current_District_Gas_Use["Current District System Hot Water Gas Use (therms)"] =
 ######################## new bldg regression #######################
 
 calculation_map_hpCOP_drybulb = pd.read_excel(
-    "UCSB Calculation Map.xlsx", sheet_name="Reg. Data - New Bldg Equip", header=1
+    INPUTSDIR / "UCSB Calculation Map.xlsx", sheet_name="Reg. Data - New Bldg Equip", header=1
 )
 
 
@@ -1710,7 +1722,9 @@ bldg_total_elec_grouped_df = (
 
 ########### Elec Cost by Billing Group  ###########
 
-elec_data_excel = pd.read_excel("UCSB Calculation Map.xlsx", sheet_name="Electric Rates by Utility Prov", header=1)
+elec_data_excel = pd.read_excel(
+    INPUTSDIR / "UCSB Calculation Map.xlsx", sheet_name="Electric Rates by Utility Prov", header=1
+)
 
 
 timestamp = elec_data_excel["Timestamp"]
@@ -1783,7 +1797,7 @@ bldg_total_elec_grouped_df["Base Electricity Cost ($)"] = (
 ######### Net Gas Use by Billing Group ###############
 
 
-# gas_data_excel = pd.read_excel("UCSB Calculation Map.xlsx",sheet_name="Gas Rates by Utility Provider",header =1)
+# gas_data_excel = pd.read_excel(INPUTSDIR / "UCSB Calculation Map.xlsx",sheet_name="Gas Rates by Utility Provider",header =1)
 
 
 # # Step 1: Merge DataFrames on 'Building ID CAAN' to include 'Billing Group Number'
