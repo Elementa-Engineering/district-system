@@ -6,7 +6,7 @@ import pandas as pd
 from districtsystem.config import INPUTSDIR
 
 # import all the sheets from the inputs excel file
-inputs_sheetDict = pd.read_excel("Inputs.xlsx", sheet_name=None)
+inputs_sheetDict = pd.read_excel(INPUTSDIR / "Inputs.xlsx", sheet_name=None)
 
 # Access individual sheets as dataframes from the dictionary
 CUP_inputs_df = inputs_sheetDict["Sheet1"]

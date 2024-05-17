@@ -1113,7 +1113,7 @@ new_CUP_Therm_Loads = filtered_bldg_differentBldgs(
     "Load (kBtu)",
     "(kBtu)",
 )
-new_CUP_Therm_Loads.to_pickle("new_CUP_Therm_Loads.pkl")
+new_CUP_Therm_Loads.to_pickle("inputs/new_CUP_Therm_Loads.pkl")
 
 ########### new CUP regression ##########################
 
@@ -1122,7 +1122,7 @@ if year == 2025:
 
 else:
     calculation_map_newCUP_regData = pd.read_excel(
-        "UCSB Calculation Map.xlsx", sheet_name="Reg. Data - New CUP Equip", header=1
+        INPUTSDIR / "UCSB Calculation Map.xlsx", sheet_name="Reg. Data - New CUP Equip", header=1
     )
 
     newCUp_reg_df = pd.DataFrame()
