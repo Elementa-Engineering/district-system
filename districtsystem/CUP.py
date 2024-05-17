@@ -1,7 +1,5 @@
-from typing import Union
-
 import pandas as pd
-from pydantic import BaseModel, computed_field, validator
+from pydantic import BaseModel, computed_field
 
 
 class CUP(BaseModel):
@@ -27,14 +25,6 @@ class CUP(BaseModel):
     TES_H_flowinto: pd.Series = None
     boiler_HWflow_gpm: pd.Series = None
     chiller_CHWSflow_gpm: pd.Series = None
-
-    class MySeries(BaseModel):
-        data: dict[str, Union[int, float, str]]  # Dictionary to store Series data
-
-        @validator("data")
-        def validate_data(cls, value):
-            # Add validation logic here if needed (e.g., check data types, keys)
-            return value
 
     class Config:
         arbitrary_types_allowed = True

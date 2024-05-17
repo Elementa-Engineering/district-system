@@ -1,8 +1,6 @@
-from typing import Union
-
 import numpy as np
 import pandas as pd
-from pydantic import BaseModel, computed_field, validator
+from pydantic import BaseModel, computed_field
 
 
 class BuildingParameters(BaseModel):
@@ -24,14 +22,6 @@ class BuildingParameters(BaseModel):
     DHWmaxApproach: int
     DHWminApproach: int
     HW_returnLosses: int
-
-    class MySeries(BaseModel):
-        data: dict[str, Union[int, float, str]]  # Dictionary to store Series data
-
-        @validator("data")
-        def validate_data(cls, value):
-            # Add validation logic here if needed (e.g., check data types, keys)
-            return value
 
     class Config:
         arbitrary_types_allowed = True
