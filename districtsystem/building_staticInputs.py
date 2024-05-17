@@ -4,7 +4,28 @@ from pydantic import BaseModel, computed_field
 
 
 class BuildingParameters(BaseModel):
-    # adding static inputs
+    """
+    Represents the parameters for a building.
+
+    Attributes:
+        HW_LoopSTP (pd.Series): Series representing the hot water loop setpoint.
+        HW_supplyLosses (int): Integer representing the hot water supply losses.
+        CHW_LoopSTP (pd.Series): Series representing the chilled water loop setpoint.
+        CHW_supplyLosses (int): Integer representing the chilled water supply losses.
+        CHW_deltaT_Max (int): Integer representing the maximum chilled water temperature difference.
+        CHW_deltaT_Min (int): Integer representing the minimum chilled water temperature difference.
+        HHW_supply_Temps (pd.Series): Series representing the hot water supply temperatures.
+        HHW_return_Temps (pd.Series): Series representing the hot water return temperatures.
+        HHW_BldgSTP (pd.Series): Series representing the hot water building setpoint.
+        DHWMonths (pd.Series): Series representing the months for domestic hot water.
+        DHWSetpoint (pd.Series): Series representing the setpoint for domestic hot water.
+        buildingDate (pd.Series): Series representing the building date.
+        hotWaterMonths (np.ndarray): NumPy array representing the months for hot water.
+        DHWmaxApproach (int): Integer representing the maximum approach for domestic hot water.
+        DHWminApproach (int): Integer representing the minimum approach for domestic hot water.
+        HW_returnLosses (int): Integer representing the hot water return losses.
+    """
+
     HW_LoopSTP: pd.Series
     HW_supplyLosses: int
     CHW_LoopSTP: pd.Series
@@ -18,7 +39,6 @@ class BuildingParameters(BaseModel):
     DHWSetpoint: pd.Series
     buildingDate: pd.Series
     hotWaterMonths: np.ndarray
-    # DHW_indices : pd.Series
     DHWmaxApproach: int
     DHWminApproach: int
     HW_returnLosses: int
@@ -29,6 +49,12 @@ class BuildingParameters(BaseModel):
     @computed_field
     @property
     def DHW_indices(self) -> pd.Series:
+        """
+        Returns the indices of the hot water months in the building's date.
+
+        Returns:
+            pd.Series: A pandas Series containing the indices of the hot water months.
+        """
         month_to_match = self.buildingDate.dt.month.values
 
         # Find the index where month matches
